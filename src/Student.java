@@ -3,6 +3,7 @@ public class Student extends Person {
 
     public Student() {
         super();
+        this.gpa = 0.0;
     }
 
     public Student(String name, String surname, double gpa) {
@@ -25,10 +26,6 @@ public class Student extends Person {
 
     @Override
     public double getPaymentAmount() {
-        if (gpa > 2.67) {
-            return 36660.00;
-        }
-        return 0.00;
+        return gpa > 2.67 ? 36660.00 : 0.0;
     }
 }
-

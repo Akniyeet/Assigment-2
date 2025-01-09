@@ -1,36 +1,30 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
-public class MyApplication {
+public class Main {
     public static void main(String[] args) {
-        // Create a list of employees and students
-        List<Payable> people = new ArrayList<>();
+        Employee emp1 = new Employee("John", "Lennon", "Manager", 50000.00);
+        Employee emp2 = new Employee("George", "Harrison", "Engineer", 45000.00);
+        Student stu1 = new Student("Paul", "McCartney", 3.5);
+        Student stu2 = new Student("Ringo", "Starr", 2.5);
 
-        Employee e1 = new Employee("John", "Lennon", "Manager", 27045.78);
-        Employee e2 = new Employee("George", "Harrison", "Developer", 50000.00);
-        Student s1 = new Student("Ringo", "Starr", 2.5);
-        Student s2 = new Student("Paul", "McCartney", 3.0);
 
-        // Add employees and students to the list
-        people.add(e1);
-        people.add(e2);
-        people.add(s1);
-        people.add(s2);
+        ArrayList<Payable> people = new ArrayList<>();
+        people.add(emp1);
+        people.add(emp2);
+        people.add(stu1);
+        people.add(stu2);
 
-        // Sort the list by payment amount
-        Collections.sort(people);
 
-        // Print the data
+        Collections.sort(people, (a, b) -> Double.compare(a.getPaymentAmount(), b.getPaymentAmount()));
+
+
         printData(people);
     }
 
-    public static void printData(Iterable<Payable> people) {
-        for (Payable person : people) {
-            String position = (person instanceof Employee) ? "Employee" : "Student";
-            System.out.printf("%s: %d. %s earns %.2f tenge\n",
-                    position,
-                    ((Person) person).getId(),
-                    ((Person) person).toString().split("\\.")[1].trim(),
-                    person.getPaymentAmount());
+    public static void printData(Iterable<Payable> payables) {
+        for (Payable p : payables) {
+            System.out.println(p.toString() + " earns " + String.format("%.2f", p.getPaymentAmount()) + " tenge");
         }
     }
 }
